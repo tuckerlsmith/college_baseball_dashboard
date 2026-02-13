@@ -34,8 +34,10 @@ tr:hover { background: #16213e; }
 .count { color: #888; font-size: 0.85rem; margin-left: 8px; }
 @media (max-width: 700px) {
   body { padding: 8px; }
+  h1 { font-size: 1.2rem; }
   th, td { padding: 4px 6px; font-size: 0.75rem; }
-  .tab { padding: 8px 12px; font-size: 0.8rem; }
+  .tab { padding: 8px 14px; font-size: 0.8rem; }
+  .hide-mobile { display: none; }
 }
 </style>
 </head>
@@ -53,8 +55,8 @@ tr:hover { background: #16213e; }
 <thead><tr>
   <th data-col="0" data-type="str">Home</th>
   <th data-col="1" data-type="str">Away</th>
-  <th data-col="2" data-type="num" class="num">Home Rating</th>
-  <th data-col="3" data-type="num" class="num">Away Rating</th>
+  <th data-col="2" data-type="num" class="num hide-mobile">Home Rating</th>
+  <th data-col="3" data-type="num" class="num hide-mobile">Away Rating</th>
   <th data-col="4" data-type="num" class="num">Home Win %</th>
   <th data-col="5" data-type="num" class="num">Away Win %</th>
   <th data-col="6" data-type="num" class="num">Watchability</th>
@@ -73,7 +75,7 @@ tr:hover { background: #16213e; }
   <th data-col="4" data-type="str">Book</th>
   <th data-col="5" data-type="num" class="num">Odds</th>
   <th data-col="6" data-type="num" class="num">Edge</th>
-  <th data-col="7" data-type="num" class="num">Kelly %</th>
+  <th data-col="7" data-type="num" class="num hide-mobile">Kelly %</th>
 </tr></thead>
 <tbody id="tbody1"></tbody>
 </table>
@@ -91,8 +93,8 @@ function buildAllGames() {
   const tbody = document.getElementById('tbody0');
   tbody.innerHTML = rows.map(r => `<tr>
     <td>${r.home}</td><td>${r.away}</td>
-    <td class="num">${Math.round(r.home_mu)}</td>
-    <td class="num">${Math.round(r.away_mu)}</td>
+    <td class="num hide-mobile">${Math.round(r.home_mu)}</td>
+    <td class="num hide-mobile">${Math.round(r.away_mu)}</td>
     <td class="num">${fmtPct(r.home_prob)}</td>
     <td class="num">${fmtPct(r.away_prob)}</td>
     <td class="num">${fmt(r.watch, 1)}</td>
@@ -112,7 +114,7 @@ function buildBetting() {
       <td>${r.book || '--'}</td>
       <td class="num">${fmtOdds(r.odds)}</td>
       <td class="num ${edgeCls}">${r.edge != null ? (r.edge * 100).toFixed(1) + '%' : '--'}</td>
-      <td class="num">${r.kelly != null ? (r.kelly * 100).toFixed(1) + '%' : '--'}</td>
+      <td class="num hide-mobile">${r.kelly != null ? (r.kelly * 100).toFixed(1) + '%' : '--'}</td>
     </tr>`;
   }).join('');
 }
